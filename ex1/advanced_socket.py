@@ -25,10 +25,8 @@ class AdvancedSocket:
         msg = data.encode()
         for i in range(0, len(msg), self.PACKAGE_SIZE - 2):
             # Adding the packet ID.
-            header = (i // (self.PACKAGE_SIZE - 2)
-                      ).to_bytes(2, byteorder="little")
-            self.send_one_package(
-                header + msg[i:i + self.PACKAGE_SIZE - 2], address)
+            header = (i // (self.PACKAGE_SIZE - 2)).to_bytes(2, byteorder="little")
+            self.send_one_package(header + msg[i:i + self.PACKAGE_SIZE - 2], address)
 
     def receive(self) -> None:
         last_seq = -1
